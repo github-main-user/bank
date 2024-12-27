@@ -9,3 +9,24 @@
 В модуле `src/processing.py` реализованы 2 функции для обработки банковских операций:
 1. filter_by_state - фильтрует операции по переданному параметру `state`.
 2. sort_by_date - возвращает новый отсортированный список операций.
+
+## Установка
+
+1. Склонировать репозиторий:
+```bash
+git clone https://github.com/github-main-user/bank.git
+```
+или
+```bash
+git clone git@github.com:github-main-user/bank.git
+```
+
+2. Зайти в директорию с проектом:
+```bash
+cd bank
+```
+
+3. Создать виртуальное окружение и установить необходимые зависимости:
+```bash
+poetry install
+```
