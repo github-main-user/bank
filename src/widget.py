@@ -37,7 +37,7 @@ def get_date(date_time: str) -> str:
     """
     # Отсечь и разделить дату
     date = date_time[:10]
-    splitted_date = date.split('-')
+    splitted_date = date.split("-")
 
     # Развенуть и склеить дату точками
-    return '.'.join(splitted_date[::-1])
+    return ".".join(splitted_date[::-1])
