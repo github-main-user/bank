@@ -8,7 +8,7 @@ def get_mask_card_number(card_number: int) -> str:
     mask[6:12] = "*" * 6  # "Скрыть" символы с 6 до 12
 
     # Разбить номер на чанки по 4 символа в каждом
-    chunked_mask = ["".join(mask[i: i + 4]) for i in range(0, len(mask), 4)]
+    chunked_mask = ["".join(mask[i : i + 4]) for i in range(0, len(mask), 4)]
 
     return " ".join(chunked_mask)
 
