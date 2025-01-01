@@ -8,6 +8,9 @@ def get_mask_card_number(card_number: int) -> str:
     Возвращает маску формата: XXXX XX** **** XXXX (X - цифра номера)
     """
 
+    if not isinstance(card_number, int):
+        raise TypeError("Номер карты должен быть числом.")
+
     mask = list(str(card_number))  # Преобразовать номер в список символов
     if len(mask) != 16:
         raise WrongNumberLengthError("Номер карты должен состоять из 16 цифр.")
@@ -25,6 +28,9 @@ def get_mask_account(account_number: int) -> str:
     Функция примимает на вход номер счёта в виде числа.
     Возвращает маску формата: **XXXX (X - цифра номера)
     """
+
+    if not isinstance(account_number, int):
+        raise TypeError("Номер счёта должен быть числом.")
 
     if len(str(account_number)) != 20:
         raise WrongNumberLengthError("Номер счёта должен состоять из 20 цифр.")
