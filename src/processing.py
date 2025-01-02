@@ -9,7 +9,18 @@ def filter_by_state(operations: list[dict], state: Optional[str] = "EXECUTED") -
     Возвращает отфильтрованный список словарей обратно.
     """
 
-    return [op for op in operations if op.get("state", "") == state]
+    if not isinstance(operations, list):
+        raise TypeError("Переданный аргумент не является итерируемым.")
+
+    filtred_list = []
+    for op in operations:
+        if not isinstance(op, dict):
+            raise TypeError("Элемент списка не является словарём.")
+
+        if op.get("state", "") == state:
+            filtred_list.append(op)
+
+    return filtred_list
 
 
 def sort_by_date(operations: list[dict], reverse: bool = True) -> list[dict]:
@@ -18,6 +29,13 @@ def sort_by_date(operations: list[dict], reverse: bool = True) -> list[dict]:
     Возвращает новый отсортированный список словарей обратно.
     По умолчанию сортировка по убыванию.
     """
+
+    if not isinstance(operations, list):
+        raise TypeError("Переданный аргумент не является итерируемым.")
+
+    for op in operations:
+        if not isinstance(op, dict):
+            raise TypeError("Элемент списка не является словарём.")
 
     return sorted(
         operations,
