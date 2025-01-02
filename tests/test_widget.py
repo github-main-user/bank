@@ -45,17 +45,17 @@ def test_valid_cards(card: str, expected: str):
 
 def test_wrong_number_length_card(wrong_number_length_card: str):
     with pytest.raises(WrongNumberLengthError):
-        assert mask_account_card(wrong_number_length_card)
+        mask_account_card(wrong_number_length_card)
 
 
 def test_empty_card_info(empty_card_info: str):
     with pytest.raises(InvalidFormatError):
-        assert mask_account_card(empty_card_info)
+        mask_account_card(empty_card_info)
 
 
 def test_empty_card_number(empty_card_number: str):
     with pytest.raises(InvalidFormatError):
-        assert mask_account_card(empty_card_number)
+        mask_account_card(empty_card_number)
 
 
 # Счета
@@ -73,7 +73,13 @@ def test_valid_accounts(account: str, expected: str):
 
 def test_wrong_number_length_account(wrong_number_length_account: str):
     with pytest.raises(WrongNumberLengthError):
-        assert mask_account_card(wrong_number_length_account)
+        mask_account_card(wrong_number_length_account)
+
+
+@pytest.mark.parametrize("data", [{}, None, 234])
+def test_invalid_data_type_mask(data):
+    with pytest.raises(TypeError):
+        mask_account_card(data)
 
 
 # Дата
@@ -91,4 +97,10 @@ def test_date(date: str, expected: str):
 
 def test_invalid_date(invalid_date_string: str):
     with pytest.raises(InvalidFormatError):
-        assert get_date(invalid_date_string)
+        get_date(invalid_date_string)
+
+
+@pytest.mark.parametrize("data", [{}, None, 234])
+def test_invalid_data_type_date(data):
+    with pytest.raises(TypeError):
+        get_date(data)
