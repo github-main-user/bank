@@ -23,14 +23,14 @@ def transaction_descriptions(transactions: list[dict]) -> Generator:
         yield transaction["description"]
 
 
-def card_number_generator(start: int, end: int) -> Generator:
+def card_number_generator(start: int, stop: int) -> Generator:
     """
     Генератор для создания номеров банковских карт в формате XXXX XXXX XXXX XXXX.
 
     start: Начальное значение (включительно), целое число.
-    end: Конечное значение (включительно), целое число.
+    stop: Конечное значение (включительно), целое число.
     Генератор возвращает номер карты в формате XXXX XXXX XXXX XXXX.
     """
-    for number in range(start, end + 1):
+    for number in range(start, stop + 1):
         num = f"{number:016d}"
         yield f"{num[:4]} {num[4:8]} {num[8:12]} {num[12:16]}"
