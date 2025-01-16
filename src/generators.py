@@ -1,15 +1,15 @@
 from typing import Generator
 
 
-def filter_by_currency(transactions: list[dict], currency_name: str) -> Generator:
+def filter_by_currency(transactions: list[dict], currency_code: str) -> Generator:
     """
     Генератор для фильтрации транзакций по валюте.
 
     transactions: список транзакций.
-    currency_name: название валюты (usd, USD).
+    currency_name: код валюты (usd, USD).
     """
     for transaction in transactions:
-        if transaction["operationAmount"]["currency"]["name"] == currency_name.upper():
+        if transaction["operationAmount"]["currency"]["code"] == currency_code.upper():
             yield transaction
 
 
@@ -23,7 +23,7 @@ def transaction_descriptions(transactions: list[dict]) -> Generator:
         yield transaction["description"]
 
 
-def card_number_generator(start, end):
+def card_number_generator(start: int, end: int) -> Generator:
     """
     Генератор для создания номеров банковских карт в формате XXXX XXXX XXXX XXXX.
 
@@ -33,4 +33,4 @@ def card_number_generator(start, end):
     """
     for number in range(start, end + 1):
         num = f"{number:016d}"
-        yield f'{num[:4]} {num[4:8]} {num[8:12]} {num[12:16]}'
+        yield f"{num[:4]} {num[4:8]} {num[8:12]} {num[12:16]}"
