@@ -4,7 +4,7 @@ from src.generators import card_number_generator, filter_by_currency, transactio
 
 
 @pytest.fixture
-def transactions():
+def transactions() -> list[dict]:
     return [
         {
             "id": 939719570,
@@ -55,7 +55,7 @@ def transactions():
 
 
 # Тест фильтрации
-def test_filter_by_existing_currency(transactions):
+def test_filter_by_existing_currency(transactions: list[dict]) -> None:
     assert list(filter_by_currency(transactions, "RUB")) == [
         {
             "id": 873106923,
@@ -78,16 +78,16 @@ def test_filter_by_existing_currency(transactions):
     ]
 
 
-def test_filter_by_wrong_currency(transactions):
+def test_filter_by_wrong_currency(transactions: list[dict]) -> None:
     assert list(filter_by_currency(transactions, "UwU")) == []
 
 
-def test_filter_empty_transactions():
+def test_filter_empty_transactions() -> None:
     assert list(filter_by_currency([], "")) == []
 
 
 # Тест описаний
-def test_single_transaction_description(transactions):
+def test_single_transaction_description(transactions: list[dict]) -> None:
     assert list(
         transaction_descriptions(
             [
@@ -105,7 +105,7 @@ def test_single_transaction_description(transactions):
     ) == ["Перевод организации"]
 
 
-def test_all_transaction_descriptions(transactions):
+def test_all_transaction_descriptions(transactions: list[dict]) -> None:
     assert list(transaction_descriptions(transactions)) == [
         "Перевод организации",
         "Перевод со счета на счет",
@@ -115,7 +115,7 @@ def test_all_transaction_descriptions(transactions):
     ]
 
 
-def test_empty_transaction_descriptions():
+def test_empty_transaction_descriptions() -> None:
     assert list(transaction_descriptions([])) == []
 
 
@@ -138,5 +138,5 @@ def test_empty_transaction_descriptions():
         (0, 0, ["0000 0000 0000 0000"]),
     ],
 )
-def test_cart_number_generator(start: int, end: int, result: list):
+def test_cart_number_generator(start: int, end: int, result: list) -> None:
     assert list(card_number_generator(start, end)) == result

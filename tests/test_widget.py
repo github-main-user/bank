@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 
 from src.masks import WrongNumberLengthError
@@ -39,21 +41,21 @@ def invalid_date_string() -> str:
         ("MasterCard 7123792289607712", "MasterCard 7123 79** **** 7712"),
     ],
 )
-def test_valid_cards(card: str, expected: str):
+def test_valid_cards(card: str, expected: str) -> None:
     assert mask_account_card(card) == expected
 
 
-def test_wrong_number_length_card(wrong_number_length_card: str):
+def test_wrong_number_length_card(wrong_number_length_card: str) -> None:
     with pytest.raises(WrongNumberLengthError):
         mask_account_card(wrong_number_length_card)
 
 
-def test_empty_card_info(empty_card_info: str):
+def test_empty_card_info(empty_card_info: str) -> None:
     with pytest.raises(InvalidFormatError):
         mask_account_card(empty_card_info)
 
 
-def test_empty_card_number(empty_card_number: str):
+def test_empty_card_number(empty_card_number: str) -> None:
     with pytest.raises(InvalidFormatError):
         mask_account_card(empty_card_number)
 
@@ -67,17 +69,17 @@ def test_empty_card_number(empty_card_number: str):
         ("Счет 12093874129386555551", "Счет **5551"),
     ],
 )
-def test_valid_accounts(account: str, expected: str):
+def test_valid_accounts(account: str, expected: str) -> None:
     assert mask_account_card(account) == expected
 
 
-def test_wrong_number_length_account(wrong_number_length_account: str):
+def test_wrong_number_length_account(wrong_number_length_account: str) -> None:
     with pytest.raises(WrongNumberLengthError):
         mask_account_card(wrong_number_length_account)
 
 
 @pytest.mark.parametrize("data", [{}, None, 234])
-def test_invalid_data_type_mask(data):
+def test_invalid_data_type_mask(data: Any) -> None:
     with pytest.raises(TypeError):
         mask_account_card(data)
 
@@ -91,16 +93,16 @@ def test_invalid_data_type_mask(data):
         ("2003-07-06T02:26:18.671407", "06.07.2003"),
     ],
 )
-def test_date(date: str, expected: str):
+def test_date(date: str, expected: str) -> None:
     assert get_date(date) == expected
 
 
-def test_invalid_date(invalid_date_string: str):
+def test_invalid_date(invalid_date_string: str) -> None:
     with pytest.raises(InvalidFormatError):
         get_date(invalid_date_string)
 
 
 @pytest.mark.parametrize("data", [{}, None, 234])
-def test_invalid_data_type_date(data):
+def test_invalid_data_type_date(data: Any) -> None:
     with pytest.raises(TypeError):
         get_date(data)

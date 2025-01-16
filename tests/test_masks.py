@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 
 from src.masks import WrongNumberLengthError, get_mask_account, get_mask_card_number
@@ -36,7 +38,7 @@ def test_get_mask_card_number_invalid_length(invalid_card_number_length: int) ->
         get_mask_card_number(invalid_card_number_length)
 
 
-def test_get_mask_card_number_invalid_type(invalid_data_type) -> None:
+def test_get_mask_card_number_invalid_type(invalid_data_type: Any) -> None:
     with pytest.raises(TypeError):
         get_mask_card_number(invalid_data_type)
 
@@ -58,6 +60,6 @@ def test_get_mask_account_invalid_length(invalid_account_number_length: int) -> 
         get_mask_account(invalid_account_number_length)
 
 
-def test_get_mask_account_invalid_type(invalid_data_type) -> None:
+def test_get_mask_account_invalid_type(invalid_data_type: Any) -> None:
     with pytest.raises(TypeError):
         get_mask_account(invalid_data_type)
