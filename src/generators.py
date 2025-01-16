@@ -29,7 +29,7 @@ def card_number_generator(start, end):
 
     start: Начальное значение (включительно), целое число.
     end: Конечное значение (включительно), целое число.
-    Номер карты в формате XXXX XXXX XXXX XXXX.
+    Генератор возвращает номер карты в формате XXXX XXXX XXXX XXXX.
     """
     for number in range(start, end + 1):
         num = f"{number:016d}"
