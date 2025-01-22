@@ -1,7 +1,5 @@
 from typing import Any
 
-import pytest
-
 from src.decorators import log
 
 
