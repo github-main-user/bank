@@ -36,7 +36,6 @@ def log(filename: Optional[str] = None) -> Callable:
                         log_file.write(log_message)
                 else:
                     print(log_message)
-                raise e
 
         return inner
 
