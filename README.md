@@ -37,7 +37,6 @@ devide(1, 0)
 ```text
 divide error: ZeroDivisionError. Inputs: (1, 0), {}
 ```
-Где тип ошибки заменяется на текст ошибки.
 
 
 # Тесты
