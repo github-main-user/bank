@@ -15,6 +15,30 @@
 2. `transaction_descriptions` - возвращает описание транзакции.
 3. `card_number_generator` - генерирует номера карт в заданном диапазоне, используя шаблон "XXXX XXXX XXXX XXXX".
 
+В модули `src/decorators.py` реализован декоратор `log`:
+Пример использования декоратора:
+```python
+@log(filename="mylog.txt")
+def divide(x, y):
+    return x / y
+
+divide(1, 2)
+```
+
+Ожидаемый вывод в лог-файл `mylog.txt` при успешном выполнении:
+```text
+divide ok
+```
+
+Ожидаемый вывод при ошибке:
+```python
+devide(1, 0)
+```
+```text
+divide error: ZeroDivisionError. Inputs: (1, 0), {}
+```
+
+
 # Тесты
 Модули обеспечены тестами в папке `tests`.
 

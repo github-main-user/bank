@@ -22,7 +22,7 @@ def transaction_descriptions(transactions: list[dict]) -> Iterator:
 
     transactions: список транзакций.
     """
-    return (transaction.get('description', '') for transaction in transactions)
+    return (transaction.get("description", "") for transaction in transactions)
 
 
 def card_number_generator(start: int, stop: int) -> Generator:
