@@ -5,7 +5,7 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.getenv('API_KEY', '')
+API_KEY = os.getenv("API_KEY", "")
 
 
 def load_transactions(file_path: str) -> list:
@@ -19,7 +19,7 @@ def load_transactions(file_path: str) -> list:
         return []
 
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
             if isinstance(data, list):
                 return data
@@ -36,9 +36,9 @@ def _get_exchange_rate_to_rub(currency_code: str) -> float:
     if currency_code == "RUB":
         return 1.0  # Если валюта уже в рублях, курс 1:1
 
-    BASE_URL = 'https://api.apilayer.com/exchangerates_data/latest'
+    BASE_URL = "https://api.apilayer.com/exchangerates_data/latest"
 
-    headers = {'apikey': API_KEY}
+    headers = {"apikey": API_KEY}
     params = {"base": currency_code, "symbols": "RUB"}
     response = requests.get(BASE_URL, headers=headers, params=params)
 
@@ -58,9 +58,9 @@ def get_transaction_amount_rub(transaction: dict) -> float:
     :return: сумма транзакции в рублях (float)
     """
     try:
-        operation_amount = transaction['operationAmount']
-        amount = float(operation_amount['amount'])
-        currency_code = operation_amount['currency']['code']
+        operation_amount = transaction["operationAmount"]
+        amount = float(operation_amount["amount"])
+        currency_code = operation_amount["currency"]["code"]
 
         exchange_rate = _get_exchange_rate_to_rub(currency_code)
         return amount * exchange_rate

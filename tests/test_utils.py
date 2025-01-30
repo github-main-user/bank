@@ -23,7 +23,7 @@ def test_load_transactions_invalid_json_not_list(mock_exists, mock_file) -> None
     assert transactions == []
 
 
-@patch("builtins.open", new_callable=mock_open, read_data='invalid json')
+@patch("builtins.open", new_callable=mock_open, read_data="invalid json")
 @patch("os.path.exists", return_value=True)
 def test_load_transactions_invalid_json_format(mock_exists, mock_file) -> None:
     transactions = load_transactions("dummy_path.json")
