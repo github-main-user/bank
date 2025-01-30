@@ -64,5 +64,5 @@ def get_transaction_amount_rub(transaction: dict) -> float:
 
         exchange_rate = _get_exchange_rate_to_rub(currency_code)
         return amount * exchange_rate
-    except (ValueError, TypeError):
+    except (KeyError, ValueError, TypeError):
         return 0
