@@ -44,7 +44,7 @@ def _get_exchange_rate_to_rub(currency_code: str) -> float:
 
     if response.status_code == 200:
         data = response.json()
-        return data["rates"]["RUB"]
+        return float(data["rates"]["RUB"])
     else:
         raise ValueError(f"Error with API: {response.text}")
 
