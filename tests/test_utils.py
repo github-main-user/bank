@@ -49,10 +49,6 @@ def test_get_exchange_rate_to_rub(mock_get) -> None:
     exchange_rate = _get_exchange_rate_to_rub("USD")
     assert exchange_rate == 75.0
 
-    exchange_rate = _get_exchange_rate_to_rub("RUB")
-    assert exchange_rate == 1.0
-
-
 @patch("src.utils.requests.get")
 def test_get_exchange_rate_to_rub_bad_request(mock_get) -> None:
     mock_response = Mock()

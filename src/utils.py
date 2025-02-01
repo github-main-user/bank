@@ -33,9 +33,6 @@ def _get_exchange_rate_to_rub(currency_code: str) -> float:
     """
     Получает текущий курс валюты к рублю (RUB) через API от "api.apilayer.com".
     """
-    if currency_code == "RUB":
-        return 1.0  # Если валюта уже в рублях, курс 1:1
-
     BASE_URL = "https://api.apilayer.com/exchangerates_data/latest"
 
     headers = {"apikey": API_KEY}
@@ -62,7 +59,7 @@ def get_transaction_amount_rub(transaction: dict) -> float:
         amount = float(operation_amount["amount"])
         currency_code = operation_amount["currency"]["code"]
 
-        exchange_rate = _get_exchange_rate_to_rub(currency_code)
+        exchange_rate = _get_exchange_rate_to_rub(currency_code) if currency_code != "RUB" else 1
         return amount * exchange_rate
     except (KeyError, ValueError, TypeError):
         return 0
