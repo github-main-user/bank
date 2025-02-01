@@ -15,7 +15,7 @@
 2. `transaction_descriptions` - возвращает описание транзакции.
 3. `card_number_generator` - генерирует номера карт в заданном диапазоне, используя шаблон "XXXX XXXX XXXX XXXX".
 
-В модули `src/decorators.py` реализован декоратор `log`:
+В модуле `src/decorators.py` реализован декоратор `log`:
 Пример использования декоратора:
 ```python
 @log(filename="mylog.txt")
@@ -37,6 +37,10 @@ devide(1, 0)
 ```text
 divide error: ZeroDivisionError. Inputs: (1, 0), {}
 ```
+
+В модуле `src/utils.py` реализовано 2 функции:
+1. `load_transactions` - Загружает данные о финансовых транзакциях из переданного JSON-файла.
+2. `get_transaction_amount_rub` - Возвращает сумму транзакции в рублях, если необходимо, конвертирует иную валюту в рубли.
 
 
 # Тесты
