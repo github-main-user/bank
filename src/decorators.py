@@ -21,7 +21,7 @@ def log(filename: Optional[str] = None) -> Callable:
                 log_message = f"{func_name} ok"
 
                 if filename:
-                    with open(filename, 'a') as log_file:
+                    with open(filename, "a") as log_file:
                         log_file.write(log_message)
                 else:
                     print(log_message)
@@ -32,7 +32,7 @@ def log(filename: Optional[str] = None) -> Callable:
                 log_message = f"{func_name} error: {type(e).__name__}. Inputs: {args}, {kwargs}"
 
                 if filename:
-                    with open(filename, 'a') as log_file:
+                    with open(filename, "a") as log_file:
                         log_file.write(log_message)
                 else:
                     print(log_message)
