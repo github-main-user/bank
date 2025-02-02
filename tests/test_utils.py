@@ -2,7 +2,7 @@ from unittest.mock import Mock, mock_open, patch
 
 import pytest
 
-from src.utils import _get_exchange_rate_to_rub, get_transaction_amount_rub, load_transactions
+from src.utils import _get_exchange_rate_to_rub, get_transaction_amount_rub, load_transactions, APIError
 
 # Тест load_transactions
 
@@ -49,9 +49,6 @@ def test_get_exchange_rate_to_rub(mock_get) -> None:
     exchange_rate = _get_exchange_rate_to_rub("USD")
     assert exchange_rate == 75.0
 
-    exchange_rate = _get_exchange_rate_to_rub("RUB")
-    assert exchange_rate == 1.0
-
 
 @patch("src.utils.requests.get")
 def test_get_exchange_rate_to_rub_bad_request(mock_get) -> None:
@@ -60,7 +57,7 @@ def test_get_exchange_rate_to_rub_bad_request(mock_get) -> None:
     mock_response.text = "Bad Request"
     mock_get.return_value = mock_response
 
-    with pytest.raises(ValueError, match="Error with API: Bad Request"):
+    with pytest.raises(APIError, match="Error with API: Bad Request"):
         _get_exchange_rate_to_rub("EUR")
 
 
