@@ -2,7 +2,7 @@ from unittest.mock import Mock, mock_open, patch
 
 import pytest
 
-from src.utils import _get_exchange_rate_to_rub, get_transaction_amount_rub, load_transactions, APIError
+from src.utils import APIError, _get_exchange_rate_to_rub, get_transaction_amount_rub, load_transactions
 
 # Тест load_transactions
 
