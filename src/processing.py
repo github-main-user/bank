@@ -69,7 +69,7 @@ def count_operations_by_category(operations: list[dict], categories: list[str]) 
     а значения - это количество операций в каждой категории.
     """
     matched_categories = [
-        operation.get("description", "") for operation in operations if operation.get("description" in categories)
+        operation.get("description", "") for operation in operations if operation.get("description") in categories
     ]
 
     return dict(Counter(matched_categories))
