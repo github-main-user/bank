@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.processing import filter_by_state, sort_by_date
+from src.processing import filter_by_description, filter_by_state, sort_by_date
 
 # Фикстуры
 
@@ -53,6 +53,30 @@ def test_invalid_data_types_filter(data: Any) -> None:
 def test_invalid_type_in_list_filter(invalid_data: list) -> None:
     with pytest.raises(TypeError):
         filter_by_state(invalid_data)
+
+
+def test_filter_by_existing_pattern() -> None:
+    operations = [
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            'description': 'Перевод организации',
+        }
+    ]
+    assert filter_by_description(operations, 'перевод') == operations
+
+
+def test_filter_by_non_existing_pattern() -> None:
+    operations = [
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            'description': 'Перевод организации',
+        }
+    ]
+    assert filter_by_description(operations, 'UwU') == []
 
 
 # Сортировка
