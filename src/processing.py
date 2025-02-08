@@ -1,4 +1,5 @@
 import re
+from collections import defaultdict
 from datetime import datetime
 from typing import Optional
 
@@ -55,7 +56,25 @@ def filter_by_description(operations: list[dict], pattern: str) -> list[dict]:
     new_operations = []
 
     for operation in operations:
-        if re.search(pattern, operation.get('description', ''), flags=re.IGNORECASE):
+        if re.search(pattern, operation.get("description", ""), flags=re.IGNORECASE):
             new_operations.append(operation)
 
     return new_operations
+
+
+def count_operations_by_category(operations: list[dict], categories: list[str]) -> dict:
+    """
+    Фукнция принимает список словарей с данными о банковских операциях и список категорий.
+    Возвращает словарь в котором ключи - это название категорий,
+    а значения - это количество операций в каждой категории.
+    """
+    category_count: dict = defaultdict(int)
+    for operation in operations:
+        description = operation.get("description", "")
+
+        for category in categories:  # Проходимся по списку, так как полученная категория может быть не нужна
+            if category.lower() == description.lower():
+                category_count[category] += 1
+                break  # Одна операция может относится только к одной категории
+
+    return dict(category_count)
