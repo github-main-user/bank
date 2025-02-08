@@ -1,5 +1,6 @@
 # Описание
 В проекте реализованы модули для работы с виджетом банковских операций клиента.
+Для взаимодействия используется файл `main.py`.
 
 # Функциональность
 В модуле `src/widget.py` реализованы 2 функции:
@@ -52,31 +53,36 @@ divide error: ZeroDivisionError. Inputs: (1, 0), {}
 Модули обеспечены тестами в папке `tests`.
 
 Запуск тестов происходит через `pytest`:
-```bash
+```shell
 pytest
 ```
 Для того чтобы проверить покрытие тестами:
-```bash
+```shell
 pytest --cov src
 ```
 
 # Установка
 
 1. Склонировать репозиторий:
-```bash
+```shell
 git clone https://github.com/github-main-user/bank.git
 ```
 или
-```bash
+```shell
 git clone git@github.com:github-main-user/bank.git
 ```
 
 2. Зайти в директорию с проектом:
-```bash
+```shell
 cd bank
 ```
 
 3. Создать виртуальное окружение и установить необходимые зависимости:
-```bash
+```shell
 poetry install
+```
+
+4. Запуск программы:
+```shell
+python main.py
 ```
