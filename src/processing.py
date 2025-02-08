@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from typing import Optional
 
@@ -42,3 +43,19 @@ def sort_by_date(operations: list[dict], reverse: bool = True) -> list[dict]:
         key=lambda op: datetime.fromisoformat(op.get("date", "1970-01-01")),
         reverse=reverse,
     )
+
+
+def filter_by_description(operations: list[dict], pattern: str) -> list[dict]:
+    """
+    Функция принимает список словарей с данными о банковских операциях и строку поиска.
+    Возвращает список словарей, у которых в описании есть данная строка.
+    Использует регулярные выражения для поиска.
+    """
+
+    new_operations = []
+
+    for operation in operations:
+        if re.search(pattern, operation.get('description', '')):
+            new_operations.append(operation)
+
+    return new_operations
