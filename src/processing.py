@@ -1,5 +1,5 @@
 import re
-from collections import defaultdict
+from collections import Counter
 from datetime import datetime
 from typing import Optional
 
@@ -68,13 +68,8 @@ def count_operations_by_category(operations: list[dict], categories: list[str]) 
     Возвращает словарь в котором ключи - это название категорий,
     а значения - это количество операций в каждой категории.
     """
-    category_count: dict = defaultdict(int)
-    for operation in operations:
-        description = operation.get("description", "")
+    matched_categories = [
+        operation.get("description", "") for operation in operations if operation.get("description" in categories)
+    ]
 
-        for category in categories:  # Проходимся по списку, так как полученная категория может быть не нужна
-            if category.lower() == description.lower():
-                category_count[category] += 1
-                break  # Одна операция может относится только к одной категории
-
-    return dict(category_count)
+    return dict(Counter(matched_categories))
