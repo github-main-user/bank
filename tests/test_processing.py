@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.processing import filter_by_state, sort_by_date
+from src.processing import count_operations_by_category, filter_by_description, filter_by_state, sort_by_date
 
 # Фикстуры
 
@@ -14,6 +14,31 @@ def valid_data() -> list[dict]:
         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
         {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
         {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+    ]
+
+
+@pytest.fixture
+def operations_with_description() -> list[dict]:
+    return [
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364", "description": "Открытие вклада"},
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 615064591,
+            "state": "CANCELED",
+            "date": "2018-10-14T08:21:33.419441",
+            "description": "Перевод с карты на карту",
+        },
     ]
 
 
@@ -53,6 +78,43 @@ def test_invalid_data_types_filter(data: Any) -> None:
 def test_invalid_type_in_list_filter(invalid_data: list) -> None:
     with pytest.raises(TypeError):
         filter_by_state(invalid_data)
+
+
+def test_filter_by_existing_pattern(operations_with_description: list) -> None:
+    assert filter_by_description(operations_with_description, "перевод") == [
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 615064591,
+            "state": "CANCELED",
+            "date": "2018-10-14T08:21:33.419441",
+            "description": "Перевод с карты на карту",
+        },
+    ]
+
+
+def test_filter_by_non_existing_pattern(operations_with_description: list) -> None:
+    assert filter_by_description(operations_with_description, "UwU") == []
+
+
+def test_count_operations_by_category(operations_with_description: list) -> None:
+    assert count_operations_by_category(
+        operations_with_description, ["Перевод организации", "Открытие вклада", "тест"]
+    ) == {"Перевод организации": 2, "Открытие вклада": 1}
+
+
+def test_count_operations_by_non_existing_categories(operations_with_description: list) -> None:
+    assert count_operations_by_category(operations_with_description, ["123", "lll", "test"]) == {}
 
 
 # Сортировка
